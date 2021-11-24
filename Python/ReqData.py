@@ -11,7 +11,9 @@ config.read('config.cfg')
 payload={}
 headers = {}
 
+# URL value
 url = config['URL']['urlAddress']
+# Contries parsing
 countries = [e.strip() for e in config.get('Countries', 'countryList').split(',')]
 
 dataInsert = []
@@ -23,12 +25,13 @@ yesterday.strftime('%Y-%m-%d')
 sDate = str(yesterday)
 eDate = str(yesterday)
 
+# Updating the URL with the proper date
 urlDynamic = url.replace("TAG_SDATE",sDate)
 urlDynamic = urlDynamic.replace("TAG_EDATE",eDate)
 
 
 for idx,c in enumerate(countries):
-    
+    # Updating the URL with the contry 
     if "TAG_COUNTRY" in urlDynamic:
         urlDynamic = urlDynamic.replace("TAG_COUNTRY", str(c))
     else:
